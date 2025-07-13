@@ -1,9 +1,10 @@
 package plugins
 
 import (
+	"context"
 	"strings"
 
-	"github.com/govdbot/govd/extractor"
+	"github.com/govdbot/govd/ext/reddit"
 	"github.com/govdbot/govd/models"
 	"github.com/govdbot/govd/plugin"
 )
@@ -14,11 +15,9 @@ func init() {
 			// Detect Reddit posts that embed redgifs
 			return strings.Contains(url, "reddit.com") && strings.Contains(url, "redgifs.com")
 		},
-		Process: func(task *models.Task) error {
-			// Extract the redgifs URL from the Reddit post
+		Process: func(ctx context.Context, task *models.Task) error {
 			if task.Reddit != nil && task.Reddit.EmbeddedURL != "" && strings.Contains(task.Reddit.EmbeddedURL, "redgifs.com") {
-				// Delegate to the redgifs extractor
-				return extractor.Extract(task.Reddit.EmbeddedURL, task)
+				return reddit.ExtractRedgifs(ctx, task.Reddit.EmbeddedURL, task)
 			}
 			return nil
 		},
