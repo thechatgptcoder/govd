@@ -1,7 +1,10 @@
 #!/bin/bash
 
-COMMIT_HASH=$(git rev-parse --short HEAD)
-BRANCH_NAME=$(git branch --show-current)
+# Fix missing imports before building
+go mod tidy
+
+COMMIT_HASH=$(git rev-parse --short HEAD 2>/dev/null || echo "dev")
+BRANCH_NAME=$(git branch --show-current 2>/dev/null || echo "main")
 
 PACKAGE_PATH="github.com/govdbot/govd/bot/handlers"
 
