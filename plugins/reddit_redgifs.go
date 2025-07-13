@@ -4,7 +4,7 @@ import (
 	"context"
 	"strings"
 
-	"github.com/thechatgptcoder/govd/ext/reddit"
+	reddit "github.com/thechatgptcoder/govd/ext/reddit"
 	"github.com/thechatgptcoder/govd/models"
 	"github.com/thechatgptcoder/govd/plugin"
 )
@@ -12,7 +12,7 @@ import (
 func init() {
 	plugin.Register("reddit-redgifs", plugin.Rule{
 		Matches: func(url string) bool {
-			// Detect Reddit posts that embed redgifs
+			// Detect Reddit posts that embed Redgifs
 			return strings.Contains(url, "reddit.com") && strings.Contains(url, "redgifs.com")
 		},
 		Process: func(ctx context.Context, task *models.Task) error {
@@ -23,4 +23,3 @@ func init() {
 		},
 	})
 }
-
