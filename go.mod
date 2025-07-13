@@ -55,5 +55,5 @@ require (
 	gorm.io/driver/mysql v1.5.7
 )
 
-// The local replace directive below makes your local imports work
+// This tells Go to use your local copy of govd during builds
 replace github.com/thechatgptcoder/govd => ./
