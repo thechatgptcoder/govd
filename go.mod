@@ -1,6 +1,6 @@
 module github.com/govdbot/govd
 
-go 1.23.0
+go 1.23
 
 toolchain go1.24.2
 
@@ -54,3 +54,6 @@ require (
 	golang.org/x/text v0.25.0 // indirect
 	gorm.io/driver/mysql v1.5.7
 )
+
+// The local replace directive below makes your local imports work
+replace github.com/thechatgptcoder/govd => ./
