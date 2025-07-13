@@ -4,9 +4,9 @@ import (
 	"context"
 	"strings"
 
-	"github.com/govdbot/govd/ext/reddit"
-	"github.com/govdbot/govd/models"
-	"github.com/govdbot/govd/plugin"
+	"github.com/thechatgptcoder/govd/ext/reddit"
+	"github.com/thechatgptcoder/govd/models"
+	"github.com/thechatgptcoder/govd/plugin"
 )
 
 func init() {
@@ -23,3 +23,4 @@ func init() {
 		},
 	})
 }
+
