@@ -11,7 +11,8 @@ services:
       - ./config.yaml:/app/config.yaml
       - ./cookies:/app/cookies
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   db:
     image: mariadb:latest
@@ -22,8 +23,19 @@ services:
       MARIADB_USER: govd
       MARIADB_PASSWORD: password
       MARIADB_ROOT_PASSWORD: example
+    volumes:
+      - db:/var/lib/mysql
     networks:
       - govd-network
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 10s
+
+volumes:
+  db:
 
 networks:
   govd-network:
